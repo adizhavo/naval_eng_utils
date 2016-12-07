@@ -7,7 +7,7 @@
 (defn csv-file
   [csv-name]
   (io/file
-  (io/resource csv-name))) ; load the csv from the resurces
+  (io/resource csv-name))) ; load the csv from the resources
 
 (defn csv-raw-content
   [csv]
