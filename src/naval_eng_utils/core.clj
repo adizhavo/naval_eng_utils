@@ -28,3 +28,27 @@
     (doseq [element (nthrest csv-content 1)]
     (def temp-data (merge temp-data element)))
   (reverse temp-data)) ; get the content of the csv, will ignore the first row which are the key for the map
+
+(defn process-csv
+  "This process loads and parses the csv file and generates the mapped-data as a result"
+  [file-name]
+  (def file (csv-file file-name))
+  (def raw-content (csv-raw-content file))
+  (def ckey (csv-keys raw-content))
+  (def data (csv-data raw-content))
+
+  (doseq [k ckey]
+    (def temp-map (hash-map k (list)))
+    (def mapped-data (merge mapped-data temp-map)))
+
+  (doseq [set data]
+    (def value-of-set (list))
+    (doseq [element set]
+      (def key-of-set (nth ckey (.indexOf set element)))
+      (def mapped-sets (get mapped-data key-of-set))
+      (def new-value-of-set (flatten (merge (list element) mapped-sets)))
+      (def mapped-data (assoc mapped-data key-of-set new-value-of-set)))))
+
+(defn -main []
+  (process-csv "sampleReport.csv")
+  (println mapped-data))
