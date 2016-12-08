@@ -1,4 +1,4 @@
-(ns naval-eng-utils.core
+(ns naval-eng-utils.app
   (:use naval-eng-utils.databuilder))
 
 (defn -main []
