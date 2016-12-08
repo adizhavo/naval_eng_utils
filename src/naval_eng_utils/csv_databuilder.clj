@@ -2,8 +2,6 @@
   (:require [clojure.java.io :as io])
   (:use clojure-csv.core))
 
-  (def mapped-data (hash-map))
-
   (defn csv-file
     [csv-name]
     (io/file
@@ -37,6 +35,7 @@
     (def ckey (csv-keys raw-content))
     (def data (csv-data raw-content))
 
+    (def mapped-data (hash-map))
     (doseq [k ckey]
       (def temp-map (hash-map k (list)))
       (def mapped-data (merge mapped-data temp-map)))
@@ -47,4 +46,5 @@
         (def key-of-set (nth ckey (.indexOf set element)))
         (def mapped-sets (get mapped-data key-of-set))
         (def new-value-of-set (flatten (merge (list element) mapped-sets)))
-        (def mapped-data (assoc mapped-data key-of-set new-value-of-set)))))
+        (def mapped-data (assoc mapped-data key-of-set new-value-of-set))))
+        (doall mapped-data))
