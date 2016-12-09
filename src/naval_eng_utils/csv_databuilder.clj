@@ -47,4 +47,4 @@
         (def mapped-sets (get mapped-data key-of-set))
         (def new-value-of-set (flatten (merge (list element) mapped-sets)))
         (def mapped-data (assoc mapped-data key-of-set new-value-of-set))))
-        (doall mapped-data))
+    (doall mapped-data))
