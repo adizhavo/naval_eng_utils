@@ -1,6 +1,11 @@
 (ns naval-eng-utils.csv-databuilder
-  (:require [clojure.java.io :as io])
+  (:require [clojure.java.io :as io] [clojure.string :as str])
   (:use clojure-csv.core))
+
+  (def error-messages {
+    :empty_key "empty key"
+    :empty_cell "n/a"
+    })
 
   (defn csv-file
     [csv-name]
