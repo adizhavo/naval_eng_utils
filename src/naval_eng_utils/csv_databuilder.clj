@@ -1,6 +1,11 @@
 (ns naval-eng-utils.csv-databuilder
-  (:require [clojure.java.io :as io])
+  (:require [clojure.java.io :as io] [clojure.string :as str])
   (:use clojure-csv.core))
+
+  (def error-messages {
+    :empty_key "empty key"
+    :empty_cell "n/a"
+    })
 
   (defn csv-file
     [csv-name]
@@ -14,37 +19,26 @@
 
   (defn csv-keys
     [csv-content]
-    (def temp-keys (list))
-    (doseq [element (nth csv-content 0)]
-      (def key-element (keyword element))
-      (def temp-keys (merge temp-keys key-element)))
-    (reverse (flatten temp-keys))) ; setups the keys from the csv file
+    (for [key-candidate (nth csv-content 0)]
+      (keyword
+        (if (str/blank? key-candidate)
+          (get error-messages :empty_key)
+          key-candidate)))) ; setups the keys from the csv file
 
   (defn csv-data
     [csv-content]
-    (def temp-data (list))
-      (doseq [element (nthrest csv-content 1)]
-      (def temp-data (merge temp-data element)))
-    (reverse temp-data)) ; get the content of the csv, will ignore the first row which are the key for the map
+    (for [data-piece (nthrest csv-content 1)]
+      (for [data data-piece]
+        (if (str/blank? data)
+          (get error-messages :empty_cell)
+          data)))) ; get the content of the csv, will ignore the first row which are the key for the map
 
   (defn process-csv
     "This process loads and parses the csv file and generates the mapped-data as a result"
     [file-name]
     (def file (csv-file file-name))
     (def raw-content (csv-raw-content file))
-    (def ckey (csv-keys raw-content))
+    (def ckeys (csv-keys raw-content))
     (def data (csv-data raw-content))
-
-    (def mapped-data (hash-map))
-    (doseq [k ckey]
-      (def temp-map (hash-map k (list)))
-      (def mapped-data (merge mapped-data temp-map)))
-
-    (doseq [set data]
-      (def value-of-set (list))
-      (doseq [element set]
-        (def key-of-set (nth ckey (.indexOf set element)))
-        (def mapped-sets (get mapped-data key-of-set))
-        (def new-value-of-set (flatten (merge (list element) mapped-sets)))
-        (def mapped-data (assoc mapped-data key-of-set new-value-of-set))))
-    (doall mapped-data))
+    (for [data-set data]
+      (zipmap ckeys data-set)))
