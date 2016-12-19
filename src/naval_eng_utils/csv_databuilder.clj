@@ -38,7 +38,7 @@
         cell)
 )))
 
-(defn process-csv
+(defn build-csv-hashmap
   "This process loads and parses the csv file and generates the mapped-data as a result"
   [file-name]
   (def file (csv-file file-name))
