@@ -1,7 +1,8 @@
-(ns naval-eng-utils.action-provider
+(ns naval-eng-utils.action-executor
   (:require clojure.core [naval-eng-utils.error-handler :as error-check]))
 
 (defn execute
+  "Executes the configured action on two mapped csv data"
   [original-report test-report]
   (loop [[data-set & next-data-set] original-report
          [test-set & next-test-set] test-report
