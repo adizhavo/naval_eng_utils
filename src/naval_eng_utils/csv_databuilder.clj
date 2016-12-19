@@ -1,14 +1,8 @@
 (ns naval-eng-utils.csv-databuilder
-  (:require [clojure.java.io :as io] [clojure.string :as str])
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str]
+            [naval-eng-utils.config :as config])
   (:use clojure-csv.core))
-
-(def default-data {
-  :empty_key "empty key"
-  :empty_cell "n/a"
-})
-
-(def empty-key (get default-data :empty-key))
-(def empty-cell (get default-data :empty-cell))
 
 (defn csv-file
   "load the csv file from the resources"
@@ -30,7 +24,7 @@
   (for [key (nth csv-content 0)]
     (keyword
       (if (str/blank? key)
-        empty-key
+        config/empty-key
         key)
 )))
 
@@ -40,7 +34,7 @@
   (for [data-set (nthrest csv-content 1)]
     (for [cell data-set]
       (if (str/blank? cell)
-        empty-cell
+        config/empty-cell
         cell)
 )))
 
