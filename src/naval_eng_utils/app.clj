@@ -6,5 +6,5 @@
 
 (defn -main []
   (spit config/output-file (op/execute (build-csv-hashmap config/original-file)
-                                       (build-csv-hashmap config/test-file)
-)))
+                                       (build-csv-hashmap config/test-file)))
+)
