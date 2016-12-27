@@ -4,7 +4,7 @@
 (def config {
   :original "resources/sampleReport.csv"
   :test "resources/sampleReport1.csv"
-  :output "report.csv"
+  :output "output/report.csv"
   :action "compare"
   :main-key (keyword "PIPING_CODE")
   :match-keys (list
