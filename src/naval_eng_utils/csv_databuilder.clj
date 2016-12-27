@@ -7,9 +7,13 @@
 (defn csv-raw-content
   "returns a sequence of vectors from the csv file"
   [csv]
+  (try
   (parse-csv
-  (slurp csv)
-))
+  (slurp csv))
+  (catch
+    Exception e (str "can't find the " csv ", exception message: " (.getMessage e)
+    (let [csv csv] (javax.swing.JOptionPane/showMessageDialog nil (str "can't find the " csv)
+))))))
 
 (defn csv-keys
   "setups the keys from the csv file"
