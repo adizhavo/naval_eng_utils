@@ -1,6 +1,6 @@
 {
-  "original" : "resources/sampleReport.csv",
-  "test" : "resources/sampleReport1.csv",
+  "original" : "resources/original.csv",
+  "test" : "resources/test.csv",
   "output" : "resources/report.csv",
   "action" : "compare",
   "main-key" : "PIPING_CODE",
