@@ -5,6 +5,6 @@
   (:gen-class))
 
 (defn -main []
-  (println (op/execute (build-csv-hashmap config/original-file)
-                       (build-csv-hashmap config/test-file)
+  (spit config/output-file (op/execute (build-csv-hashmap config/original-file)
+                                       (build-csv-hashmap config/test-file)
 )))
