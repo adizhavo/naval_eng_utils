@@ -1,16 +1,9 @@
 (ns naval-eng-utils.config
-  (:require clojure.core))
+  (:require clojure.core [cheshire.core :refer :all]))
 
-(def config {
-  :original "resources/sampleReport.csv"
-  :test "resources/sampleReport1.csv"
-  :output "output/report.csv"
-  :action "compare"
-  :main-key (keyword "PIPING_CODE")
-  :match-keys (list
-    (keyword "DN")
-    (keyword "ZONA")
-)})
+(def config-path "resources/config.json")
+
+(def config (parse-string (slurp config-path) true))
 
 (def original-file (get config :original))
 (def test-file (get config :test))
