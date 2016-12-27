@@ -1,8 +1,9 @@
 (ns naval-eng-utils.app
+  (:require [naval-eng-utils.config :as config])
   (:use naval-eng-utils.csv-databuilder
-            [naval-eng-utils.action-executor :as action]))
+        [naval-eng-utils.action-executor :as op]))
 
 (defn -main []
-  (println (action/execute (build-csv-hashmap "sampleReport.csv")
-                           (build-csv-hashmap "sampleReport1.csv")
+  (println (op/execute (build-csv-hashmap config/original-file)
+                       (build-csv-hashmap config/test-file)
 )))
