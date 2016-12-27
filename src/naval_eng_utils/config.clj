@@ -3,8 +3,8 @@
 
 ;file names config
 (def file-names-config {
-  :original "sampleReport.csv"
-  :test "sampleReport1.csv"
+  :original "resources/sampleReport.csv"
+  :test "resources/sampleReport1.csv"
 })
 
 (def original-file (get file-names-config :original))
