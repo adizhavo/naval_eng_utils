@@ -12,7 +12,7 @@
   (slurp csv))
   (catch
     Exception e (str "can't find the " csv ", exception message: " (.getMessage e)
-    (let [csv csv] (javax.swing.JOptionPane/showMessageDialog nil (str "can't find the " csv)
+    (let [csv csv] (javax.swing.JOptionPane/showMessageDialog nil (str "can't find the " csv " file")
 ))))))
 
 (defn csv-keys
