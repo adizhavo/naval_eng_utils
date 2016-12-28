@@ -4,19 +4,16 @@
             [naval-eng-utils.config :as config])
   (:use clojure-csv.core))
 
-(defn csv-file
-  "load the csv file from the resources"
-  [csv-name]
-  (io/file
-  (io/resource csv-name)
-))
-
 (defn csv-raw-content
   "returns a sequence of vectors from the csv file"
   [csv]
+  (try
   (parse-csv
-  (slurp csv)
-))
+  (slurp csv))
+  (catch
+    Exception e (str "can't find the " csv ", exception message: " (.getMessage e)
+    (let [csv csv] (javax.swing.JOptionPane/showMessageDialog nil (str "can't find the " csv " file")
+))))))
 
 (defn csv-keys
   "setups the keys from the csv file"
@@ -40,9 +37,8 @@
 
 (defn build-csv-hashmap
   "This process loads and parses the csv file and generates the mapped-data as a result"
-  [file-name]
-  (def file (csv-file file-name))
-  (def raw-content (csv-raw-content file))
+  [file-path]
+  (def raw-content (csv-raw-content file-path))
   (def ckeys (csv-keys raw-content))
   (def data (csv-data raw-content))
   (for [data-set data]
