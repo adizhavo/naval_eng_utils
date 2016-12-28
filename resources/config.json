@@ -1,7 +1,7 @@
 {
   "original" : "resources/original.csv",
   "test" : "resources/test.csv",
-  "output" : "resources/report.csv",
+  "output" : "output/report.csv",
   "action" : "compare",
   "main-key" : "PIPING_CODE",
   "match-keys" : ["DN", "ZONA"]
