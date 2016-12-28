@@ -24,3 +24,25 @@
       (compare-each-field original-set test-set config/match-keys))
     (str "")
 ))
+
+(defn loop-test-report
+  [data-set test-report]
+  (loop [[test-set & next-test-set] test-report
+         result (str "")]
+         (if (empty? test-set)
+             result
+             (recur next-test-set (.concat result (compare-data-sets data-set test-set)
+)))))
+
+(defn loop-original-report
+  [original-report test-report]
+  (loop [[data-set & next-data-set] original-report
+         result (str "")]
+         (if (empty? data-set)
+             result
+             (recur next-data-set (.concat result (loop-test-report data-set test-report)
+)))))
+
+(defn execute-comparison
+  [original-report test-report]
+  (loop-original-report original-report test-report))
