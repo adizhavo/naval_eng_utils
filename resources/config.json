@@ -3,6 +3,6 @@
   "test" : "resources/test.csv",
   "output" : "output/report.csv",
   "action" : "compare",
-  "main-key" : "PIPING_CODE",
-  "match-keys" : ["DN", "ZONA"]
+  "main-key" : "code",
+  "match-keys" : ["data1", "data2", "data3"]
 }
