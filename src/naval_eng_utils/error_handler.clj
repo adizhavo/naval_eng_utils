@@ -28,3 +28,14 @@
         (= (contains-match-keys data-set config/match-keys) false) (str "Original report doesn't contain on of the " config/match-keys " keys.")
         (= (contains-match-keys test-set config/match-keys) false) (str "Test report doesn't contain on of the " config/match-keys " keys.")
 ))
+
+(defn check-reports-validity
+  [original-report test-report]
+  (loop [[data-set & next-data-set] original-report
+         [test-set & next-test-set] test-report
+         result (str "")]
+         (cond (empty? data-set) result
+               (not (is-valid data-set test-set)) (error-message data-set test-set)
+               :else (recur next-data-set next-test-set result)
+
+)))

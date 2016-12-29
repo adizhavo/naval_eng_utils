@@ -4,7 +4,8 @@
         [naval-eng-utils.action-executor :as op])
   (:gen-class))
 
+(def original-report (doall (build-csv-hashmap config/original-file)))
+(def test-report (doall (build-csv-hashmap config/test-file)))
+
 (defn -main []
-  (spit config/output-file (op/execute (build-csv-hashmap config/original-file)
-                                       (build-csv-hashmap config/test-file)
-)))
+  (spit config/output-file (op/execute original-report test-report)))
