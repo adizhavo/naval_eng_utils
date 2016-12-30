@@ -30,6 +30,7 @@
 ))
 
 (defn check-reports-validity
+  "Loops through the reports and checks the validity"
   [original-report test-report]
   (loop [[data-set & next-data-set] original-report
          [test-set & next-test-set] test-report
