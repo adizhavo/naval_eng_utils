@@ -2,6 +2,7 @@
   (:require clojure.core [naval-eng-utils.config :as config]))
 
 (defn format-report
+  "Fomats the report based"
   [report]
   (if (= 0 (count report))
     (.concat report "no error found\n")
@@ -9,6 +10,7 @@
 ))
 
 (defn compare-each-field
+  "Compares each field in the data sets"
   [original-set test-set match-keys]
   (loop [[mkey & next-mkey] match-keys
          result (str "")]
@@ -18,6 +20,7 @@
 )))
 
 (defn compare-data-sets
+  "Checks if the origina data set is comparable with the test data set"
   [original-set test-set]
   (if (= (get original-set (keyword config/main-key)) (get test-set (keyword config/main-key)))
     (.concat (str "Checked " config/main-key " " (get original-set (keyword config/main-key)) ",")
@@ -26,6 +29,7 @@
 ))
 
 (defn loop-test-report
+  "Second loop foreach field in the test report"
   [data-set test-report]
   (loop [[test-set & next-test-set] test-report
          result (str "")]
@@ -35,6 +39,7 @@
 )))))
 
 (defn loop-original-report
+  "First loop foreach field in the original report"
   [original-report test-report]
   (loop [[data-set & next-data-set] original-report
          result (str "")]
@@ -44,5 +49,6 @@
 )))))
 
 (defn execute-comparison
+  "Starts the comparison action"
   [original-report test-report]
   (loop-original-report original-report test-report))
