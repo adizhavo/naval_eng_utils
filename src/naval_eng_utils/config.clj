@@ -6,7 +6,7 @@
 (def original-file (get config :original))
 (def test-file (get config :test))
 (def output-file (get config :output))
-(def action (get config :action))
+(def actions (get config :actions))
 (def main-key (get config :main-key))
 (def match-keys (get config :match-keys))
 

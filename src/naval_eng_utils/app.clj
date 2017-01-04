@@ -8,4 +8,9 @@
 (def test-report (doall (build-csv-hashmap config/test-file)))
 
 (defn -main []
-  (spit config/output-file (op/execute config/action original-report test-report)))
+  (loop [[action & next-action] config/actions]
+    (if (empty? action) 0
+      (do
+        (spit config/output-file (op/execute action original-report test-report))
+        (recur next-action)
+))))

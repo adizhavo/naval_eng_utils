@@ -2,7 +2,7 @@
   "original" : "resources/original.csv",
   "test" : "resources/test.csv",
   "output" : "output/report.csv",
-  "action" : "comparison",
+  "actions" : ["comparison", "duplication"],
   "main-key" : "code",
   "match-keys" : ["data1", "data2", "data3"]
 }
