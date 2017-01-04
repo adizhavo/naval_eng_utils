@@ -10,6 +10,11 @@
 (def main-key (get config :main-key))
 (def match-keys (get config :match-keys))
 
+(def supported-action {
+  :comparison "comparison"
+  :duplication "duplication"
+})
+
 ;Data builder default messages
 (def default-data {
   :empty_key "empty key"
