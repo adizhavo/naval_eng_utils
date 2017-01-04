@@ -11,6 +11,7 @@
   (loop [[action & next-action] config/actions]
     (if (empty? action) 0
       (do
-        (spit config/output-file (op/execute action original-report test-report))
+        (spit (str config/output-folder action config/output-suffix) 
+          (op/execute action original-report test-report))
         (recur next-action)
 ))))
