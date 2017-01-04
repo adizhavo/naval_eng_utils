@@ -1,8 +1,9 @@
 {
   "original" : "resources/original.csv",
   "test" : "resources/test.csv",
-  "output" : "output/report.csv",
-  "action" : "compare",
+  "output-folder" : "output/",
+  "output-suffix" : "-report.csv",
+  "actions" : ["duplication", "comparison"],
   "main-key" : "code",
   "match-keys" : ["data1", "data2", "data3"]
 }

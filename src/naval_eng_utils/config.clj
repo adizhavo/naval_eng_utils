@@ -5,10 +5,16 @@
 (def config (parse-string (slurp config-path) true))
 (def original-file (get config :original))
 (def test-file (get config :test))
-(def output-file (get config :output))
-(def action (get config :action))
+(def output-folder (get config :output-folder))
+(def output-suffix (get config :output-suffix))
+(def actions (get config :actions))
 (def main-key (get config :main-key))
 (def match-keys (get config :match-keys))
+
+(def supported-action {
+  :comparison "comparison"
+  :duplication "duplication"
+})
 
 ;Data builder default messages
 (def default-data {
