@@ -2,6 +2,7 @@
   (:require clojure.core [naval-eng-utils.config :as config]))
 
 (defn check-for-duplication
+  "Second loop throught all the data set and checks if a duplication happens"
   [report report-name data-to-check data-to-check-index]
   (loop [[check-data-set & next-check-data-set] report]
          (cond (empty? check-data-set) (str report-name " doesnt have duplicate data for the " config/main-key " key\n")
@@ -11,6 +12,7 @@
 )))
 
 (defn check-report
+  "First loop throught each data set"
   [report report-name]
   (loop [[data-set & next-data-set] report
          result (str "")]
@@ -24,6 +26,7 @@
 ))))))
 
 (defn execute-duplication-check
+  "Returns the result if the original or test report have duplicate key data"
   [original-report test-report]
   (.concat (check-report original-report "Original") (check-report test-report "Test")
 ))
